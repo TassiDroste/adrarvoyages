@@ -1531,7 +1531,7 @@ footer {
           <p>Agence de voyages spécialisée en Mauritanie, basée en France. Tous nos circuits sont conduits par des guides mauritaniens locaux, avec un accompagnement francophone dédié.</p>
           <div class="contact-detail">
             <span class="cd-label">E-mail</span>
-            <span class="cd-value">bonjour@adrar-voyages.com</span>
+            <span class="cd-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="066469686c6973744667627467742b70697f676163752865696b">[email&#160;protected]</a></span>
           </div>
           <div class="contact-detail">
             <span class="cd-label">Téléphone</span>
@@ -1588,7 +1588,7 @@ footer {
         <h4>Contact</h4>
         <ul>
           <li><a onclick="go('contact')">Nous écrire</a></li>
-          <li><span>bonjour@adrar-voyages.com</span></li>
+          <li><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="97f5f8f9fdf8e2e5d7f6f3e5f6e5bae1f8eef6f0f2e4b9f4f8fa">[email&#160;protected]</a></span></li>
           <li><span>+33 (0)1 XX XX XX XX</span></li>
         </ul>
       </div>
@@ -1603,7 +1603,7 @@ footer {
 <!-- ══════════════════════════════════════
      JAVASCRIPT
 ══════════════════════════════════════ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script><script>
 // Page map: logical name → element id
 const PAGE_MAP = {
   'home':           'p-home',
@@ -1657,18 +1657,4 @@ function initReveal() {
   }, { threshold: 0.1 });
   revealEls.forEach(el => { el.classList.remove('in'); io.observe(el); });
 }
-window.addEventListener('DOMContentLoaded', () => setTimeout(initReveal, 100));
-
-// Contact form
-function handleSubmit(e) {
-  e.preventDefault();
-  const btn = e.target.querySelector('button[type=submit]');
-  btn.textContent = 'Message envoyé ✓';
-  btn.style.background = 'var(--ink-3)';
-  btn.style.color = 'var(--gold)';
-  btn.disabled = true;
-  e.target.reset();
-}
-</script>
-</body>
-</html>
+window.addEventListener('DO
