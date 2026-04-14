@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adrar Voyages — Mauritanie Authentique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════ */
+:root {
+  --ink:        #16110C;
+  --ink-2:      #231A12;
+  --ink-3:      #302318;
+  --gold:       #C8A96A;
+  --gold-light: #DFC08A;
+  --gold-pale:  #F0DFB8;
+  --cream:      #F7F0E2;
+  --text:       #EDE4D2;
+  --muted:      #9A8872;
+  --faint:      rgba(200,169,106,0.18);
+  --border:     rgba(200,169,106,0.22);
+  --border-s:   rgba(200,169,106,0.45);
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: default;
+}
+img { display: block; max-width: 100%; }
+button { font-family: inherit; }
+a { text-decoration: none; color: inherit; }
+
+/* ═══════════════════════════════════════
+   TYPOGRAPHY SCALE
+═══════════════════════════════════════ */
+.t-eyebrow {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.t-display {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.2rem, 7vw, 6.5rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+.t-display em { font-style: italic; color: var(--gold); }
+.t-h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1.15;
+}
+.t-h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text);
+}
+.t-body { font-size: 0.9rem; color: var(--muted); line-height: 1.85; }
+.t-lead { font-size: 1.05rem; color: var(--muted); line-height: 1.9; }
+
+/* ═══════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════ */
+.divider { width: 48px; height: 1px; background: var(--gold); margin: 1.2rem 0; }
+.container { max-width: 1180px; margin: 0 auto; padding: 0 2.5rem; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+
+/* ═══════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.65rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border: none; cursor: pointer;
+  transition: all 0.25s ease;
+}
+.btn-gold { background: var(--gold); color: var(--ink); }
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border-s); }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+.btn-arrow::after { content: '→'; transition: transform 0.2s; }
+.btn-arrow:hover::after { transform: translateX(4px); }
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 2.5rem;
+  transition: background 0.4s, padding 0.3s;
+  background: linear-gradient(to bottom, rgba(22,17,12,0.9) 0%, transparent 100%);
+}
+#nav.solid {
+  background: rgba(22,17,12,0.97);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2.5rem;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 300;
+  color: var(--gold); letter-spacing: 0.04em;
+  cursor: pointer; white-space: nowrap;
+}
+.nav-logo span { font-style: italic; }
+.nav-links {
+  display: flex; align-items: center; gap: 0.2rem;
+  list-style: none;
+}
+.nav-links li a {
+  font-size: 0.62rem; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted); padding: 0.5rem 0.8rem;
+  cursor: pointer; transition: color 0.2s;
+  border: none; background: none;
+}
+.nav-links li a:hover { color: var(--gold); }
+.nav-cta {
+  font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 0.55rem 1.3rem;
+  border: 1px solid var(--border-s);
+  color: var(--text); background: none; cursor: pointer;
+  transition: all 0.2s;
+}
+.nav-cta:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Mobile nav */
+.nav-toggle {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 1px;
+  background: var(--gold); transition: all 0.3s;
+}
+.mobile-menu {
+  display: none;
+  position: fixed; top: 60px; left: 0; right: 0; z-index: 190;
+  background: rgba(22,17,12,0.98); border-bottom: 1px solid var(--border);
+  padding: 1.5rem 2.5rem;
+  flex-direction: column; gap: 0.2rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border); cursor: pointer;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--gold); }
+
+/* ═══════════════════════════════════════
+   PAGE SYSTEM
+═══════════════════════════════════════ */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero {
+  position: relative; height: 100vh; min-height: 600px;
+  display: flex; align-items: flex-end; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center 35%;
+  animation: slowzoom 18s ease-out forwards;
+}
+@keyframes slowzoom {
+  from { transform: scale(1.06); }
+  to   { transform: scale(1.00); }
+}
+.hero-veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    175deg,
+    rgba(22,17,12,0.15) 0%,
+    rgba(22,17,12,0.3) 40%,
+    rgba(22,17,12,0.88) 85%,
+    rgba(22,17,12,1) 100%
+  );
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 2.5rem 5.5rem;
+  max-width: 820px;
+}
+.hero-content .t-eyebrow { margin-bottom: 1.5rem; }
+.hero-content .t-display { color: var(--cream); margin-bottom: 1.8rem; }
+.hero-sub {
+  font-size: 0.95rem; color: var(--muted);
+  max-width: 500px; line-height: 1.85; margin-bottom: 2.8rem;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* Scroll cue */
+.scroll-cue {
+  position: absolute; bottom: 2rem; right: 2.5rem; z-index: 3;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.scroll-cue-text {
+  font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--muted); writing-mode: vertical-rl;
+}
+.scroll-cue-line {
+  width: 1px; height: 55px;
+  background: linear-gradient(to bottom, transparent, var(--gold));
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:.25} 50%{opacity:1} }
+
+/* ═══════════════════════════════════════
+   SECTIONS
+═══════════════════════════════════════ */
+.section { padding: 6rem 0; }
+.section-sm { padding: 3.5rem 0; }
+.section-header { margin-bottom: 3.5rem; }
+
+/* ═══════════════════════════════════════
+   WELCOME TEXT BLOCK
+═══════════════════════════════════════ */
+.welcome-block {
+  max-width: 780px; margin: 0 auto; text-align: center;
+  padding: 5rem 2.5rem;
+}
+.welcome-block p {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 300; color: var(--text);
+  line-height: 1.9; margin-bottom: 1.5rem;
+}
+.welcome-block .close-line {
+  font-style: italic; color: var(--gold);
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  margin-top: 1.5rem;
+}
+
+/* ═══════════════════════════════════════
+   PHOTO FILM STRIP
+═══════════════════════════════════════ */
+.film-strip {
+  display: flex; gap: 3px; height: 340px; overflow: hidden;
+}
+.film-strip-img {
+  flex: 1; overflow: hidden; position: relative; cursor: pointer;
+  transition: flex 0.55s cubic-bezier(.4,0,.2,1);
+}
+.film-strip-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.7) saturate(0.9);
+  transition: filter 0.4s, transform 0.5s;
+}
+.film-strip-img:hover { flex: 2.8; }
+.film-strip-img:hover img { filter: brightness(0.9) saturate(1.1); transform: scale(1.03); }
+
+/* ═══════════════════════════════════════
+   WHY GRID
+═══════════════════════════════════════ */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border);
+  margin-top: 3.5rem;
+}
+.why-cell {
+  padding: 2.2rem 2rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+}
+.why-cell:hover { background: var(--faint); }
+.why-cell:nth-child(3n) { border-right: none; }
+.why-cell:nth-last-child(-n+3) { border-bottom: none; }
+.why-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem; font-weight: 300;
+  color: var(--border); line-height: 1; margin-bottom: 0.9rem;
+}
+.why-cell h3 { font-size: 1rem; color: var(--gold-light); margin-bottom: 0.7rem; font-weight: 500; letter-spacing: 0.03em; }
+.why-cell p { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+
+/* ═══════════════════════════════════════
+   TOUR CARDS GRID
+═══════════════════════════════════════ */
+.tour-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; background: var(--border); margin-top: 3.5rem;
+}
+.tour-card {
+  position: relative; overflow: hidden;
+  aspect-ratio: 2/3; cursor: pointer; background: var(--ink-2);
+}
+.tour-card img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.65);
+  transition: transform 0.65s cubic-bezier(.4,0,.2,1), filter 0.4s;
+}
+.tour-card:hover img { transform: scale(1.07); filter: brightness(0.45); }
+.tc-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(22,17,12,0.97) 0%, rgba(22,17,12,0.2) 55%, transparent 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 1.8rem;
+}
+.tc-tag { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+.tc-title { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 300; color: var(--cream); margin-bottom: 0.5rem; line-height: 1.2; }
+.tc-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem;
+  opacity: 0; transform: translateY(8px); transition: opacity 0.3s, transform 0.3s; }
+.tour-card:hover .tc-desc { opacity: 1; transform: translateY(0); }
+.tc-link { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);
+  opacity: 0; transition: opacity 0.3s; }
+.tour-card:hover .tc-link { opacity: 1; }
+
+/* ═══════════════════════════════════════
+   PULL QUOTE
+═══════════════════════════════════════ */
+.pull-quote {
+  border-left: 2px solid var(--gold);
+  padding: 2rem 2.5rem 2rem 3rem;
+  margin: 3rem 0;
+  background: var(--faint);
+}
+.pull-quote blockquote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  font-style: italic; font-weight: 300;
+  color: var(--text); line-height: 1.45;
+}
+.pull-quote cite {
+  display: block; margin-top: 1rem;
+  font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--gold); font-style: normal;
+}
+
+/* ═══════════════════════════════════════
+   PAGE HEADER (inner pages)
+═══════════════════════════════════════ */
+.page-hero {
+  position: relative; height: 58vh; min-height: 420px;
+  display: flex; align-items: flex-end; overflow: hidden;
+}
+.page-hero img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.45);
+}
+.page-hero-veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--ink) 0%, rgba(22,17,12,0.3) 60%, transparent 100%);
+}
+.page-hero-content {
+  position: relative; z-index: 2; padding: 0 2.5rem 3rem;
+}
+.page-hero-content .t-display { font-size: clamp(2.4rem, 5vw, 4.5rem); color: var(--cream); }
+
+/* ═══════════════════════════════════════
+   BACK BUTTON
+═══════════════════════════════════════ */
+.back-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold);
+  background: none; border: none; cursor: pointer;
+  padding: 1.2rem 2.5rem 0;
+  transition: gap 0.2s;
+}
+.back-btn::before { content: '←'; font-size: 0.9rem; }
+.back-btn:hover { gap: 0.8rem; }
+
+/* ═══════════════════════════════════════
+   TOUR DETAIL
+═══════════════════════════════════════ */
+.tour-meta-bar {
+  display: flex; flex-wrap: wrap; gap: 0;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  margin: 2.5rem 0 3rem;
+}
+.tmi {
+  flex: 1; min-width: 120px; padding: 1.2rem 1.8rem;
+  border-right: 1px solid var(--border);
+}
+.tmi:last-child { border-right: none; }
+.tmi-label { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.35rem; }
+.tmi-value { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--text); }
+
+.tour-layout { display: grid; grid-template-columns: 1fr 340px; gap: 4rem; align-items: start; }
+
+.day-line {
+  position: relative; padding-left: 2rem; margin-bottom: 2.5rem;
+  border-left: 1px solid var(--border);
+}
+.day-line::before {
+  content: ''; position: absolute; left: -4px; top: 7px;
+  width: 7px; height: 7px; border-radius: 50%; background: var(--gold);
+}
+.day-tag { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+.day-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--text); margin-bottom: 0.6rem; line-height: 1.3; }
+.day-body { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+
+/* Sticky sidebar */
+.sidebar-box {
+  background: var(--ink-2); border: 1px solid var(--border);
+  padding: 2rem; position: sticky; top: 90px;
+}
+.sidebar-box h4 { font-size: 0.8rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.sb-list { list-style: none; margin-bottom: 1.5rem; }
+.sb-list li {
+  font-size: 0.82rem; color: var(--muted);
+  padding: 0.55rem 0; border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start; gap: 0.7rem;
+}
+.sb-list li::before { content: '·'; color: var(--gold); flex-shrink: 0; font-size: 1.2rem; line-height: 1; margin-top: -1px; }
+.warn-box {
+  background: rgba(200,169,106,0.07); border-left: 2px solid var(--gold);
+  padding: 1rem 1.3rem; margin-bottom: 2.5rem;
+}
+.warn-box p { font-size: 0.82rem; color: var(--text); line-height: 1.7; }
+
+/* ═══════════════════════════════════════
+   SUSTAINABILITY
+═══════════════════════════════════════ */
+.pledge-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
+.pledge-col h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold); margin-bottom: 1.5rem; font-weight: 300; font-style: italic; }
+.pledge-item {
+  padding: 1rem 1.4rem; margin-bottom: 0.8rem;
+  border-left: 2px solid var(--border); transition: border-color 0.2s;
+}
+.pledge-item:hover { border-left-color: var(--gold); }
+.pledge-item h4 { font-size: 0.82rem; font-weight: 500; color: var(--text); margin-bottom: 0.3rem; letter-spacing: 0.03em; }
+.pledge-item p { font-size: 0.82rem; color: var(--muted); line-height: 1.75; }
+
+/* ═══════════════════════════════════════
+   VOCABULARY
+═══════════════════════════════════════ */
+.vocab-intro {
+  max-width: 640px; margin-bottom: 3rem;
+}
+.vocab-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 1px; background: var(--border);
+}
+.vocab-card {
+  background: var(--ink); padding: 1.5rem 1.8rem; transition: background 0.2s;
+}
+.vocab-card:hover { background: var(--ink-2); }
+.vc-arabic {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; color: var(--gold); margin-bottom: 0.2rem;
+  direction: rtl; text-align: right;
+}
+.vc-roman { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; }
+.vc-meaning { font-size: 0.9rem; color: var(--text); margin-bottom: 0.25rem; font-weight: 400; }
+.vc-note { font-size: 0.78rem; color: var(--muted); font-style: italic; line-height: 1.55; }
+.tea-box {
+  background: var(--ink-2); border: 1px solid var(--border);
+  padding: 2rem 2.2rem; margin-top: 3rem; max-width: 680px;
+}
+.tea-box h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold); font-style: italic; margin-bottom: 0.8rem; }
+.tea-box p { font-size: 0.88rem; color: var(--muted); line-height: 1.8; }
+
+/* ═══════════════════════════════════════
+   TOP 10
+═══════════════════════════════════════ */
+.top10 { margin-top: 3rem; }
+.top10-row {
+  display: grid; grid-template-columns: 70px 1fr 300px;
+  gap: 2rem; align-items: center;
+  padding: 2.2rem 0; border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.top10-row:hover { background: var(--faint); margin: 0 -1rem; padding: 2.2rem 1rem; }
+.top10-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem; font-weight: 300; color: var(--border);
+  text-align: right; padding-right: 1.5rem;
+  border-right: 1px solid var(--border); line-height: 1;
+}
+.top10-content h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: var(--gold-light); margin-bottom: 0.5rem; font-weight: 400; }
+.top10-content p { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
+.top10-img { width: 300px; height: 180px; object-fit: cover; filter: brightness(0.75); }
+
+/* ═══════════════════════════════════════
+   PACKING LIST
+═══════════════════════════════════════ */
+.pack-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  gap: 1.5rem; margin-top: 3rem;
+}
+.pack-cat {
+  background: var(--ink-2); border: 1px solid var(--border); padding: 1.6rem;
+}
+.pack-cat h3 {
+  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.1rem; padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--border);
+}
+.pack-ul { list-style: none; }
+.pack-ul li {
+  font-size: 0.82rem; color: var(--muted); padding: 0.38rem 0;
+  border-bottom: 1px solid rgba(200,169,106,0.07);
+  display: flex; align-items: flex-start; gap: 0.6rem;
+}
+.pack-ul li::before { content: '—'; color: var(--gold); flex-shrink: 0; font-size: 0.7rem; margin-top: 2px; }
+.pack-banner {
+  background: rgba(200,169,106,0.07); border-left: 3px solid var(--gold);
+  padding: 1.3rem 1.8rem; margin: 2rem 0;
+}
+.pack-banner p { font-size: 0.88rem; color: var(--text); line-height: 1.8; }
+.pack-banner strong { color: var(--gold); }
+
+/* ═══════════════════════════════════════
+   CONTACT FORM
+═══════════════════════════════════════ */
+.contact-layout { display: grid; grid-template-columns: 1fr 380px; gap: 4rem; align-items: start; }
+.form-group { margin-bottom: 1.2rem; }
+.form-group label {
+  display: block; font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.5rem;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%; background: var(--ink-2); border: 1px solid var(--border);
+  color: var(--text); padding: 0.75rem 1rem;
+  font-family: 'Raleway', sans-serif; font-size: 0.88rem; font-weight: 300;
+  transition: border-color 0.2s; outline: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--gold); }
+.form-group select option { background: var(--ink-2); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.contact-info h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold); font-style: italic; margin-bottom: 1.5rem; font-weight: 300; }
+.contact-info p { font-size: 0.85rem; color: var(--muted); line-height: 1.85; margin-bottom: 1.5rem; }
+.contact-detail {
+  display: flex; align-items: flex-start; gap: 0.8rem;
+  padding: 0.9rem 0; border-bottom: 1px solid var(--border);
+}
+.cd-label { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); min-width: 70px; margin-top: 2px; }
+.cd-value { font-size: 0.85rem; color: var(--text); }
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer {
+  background: var(--ink-2); border-top: 1px solid var(--border);
+  padding: 4rem 0 2rem;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem; margin-bottom: 3rem;
+}
+.footer-brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 300; color: var(--gold); margin-bottom: 1rem;
+}
+.footer-col h4 {
+  font-size: 0.62rem; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem;
+}
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.5rem; }
+.footer-col ul li a {
+  font-size: 0.82rem; color: var(--muted);
+  transition: color 0.2s; cursor: pointer;
+}
+.footer-col ul li a:hover { color: var(--gold); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 2rem; border-top: 1px solid var(--border);
+}
+.footer-bottom p { font-size: 0.72rem; color: var(--muted); }
+
+/* ═══════════════════════════════════════
+   FADE-IN ANIMATION
+═══════════════════════════════════════ */
+.reveal {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 960px) {
+  #nav { padding: 1.2rem 1.5rem; }
+  .nav-links, .nav-cta { display: none; }
+  .nav-toggle { display: flex; }
+  .hero-content, .back-btn, .page-hero-content { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .container { padding: 0 1.5rem; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .tour-grid { grid-template-columns: 1fr; }
+  .tour-card { aspect-ratio: 4/3; }
+  .tour-layout { grid-template-columns: 1fr; }
+  .sidebar-box { position: static; }
+  .pledge-layout { grid-template-columns: 1fr; }
+  .top10-row { grid-template-columns: 50px 1fr; }
+  .top10-img { display: none; }
+  .contact-layout { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .film-strip { height: 220px; }
+}
+@media (max-width: 600px) {
+  .why-grid { grid-template-columns: 1fr; }
+  .why-cell:nth-child(3n) { border-right: none; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .t-display { font-size: 2.6rem; }
+  .tour-meta-bar { flex-direction: column; }
+  .tmi { border-right: none; border-bottom: 1px solid var(--border); }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-logo" onclick="go('home')">Adrar <span>Voyages</span></div>
+  <ul class="nav-links">
+    <li><a onclick="go('home')">Accueil</a></li>
+    <li><a onclick="go('tours')">Nos Circuits</a></li>
+    <li><a onclick="go('top10')">Top 10</a></li>
+    <li><a onclick="go('sustainability')">Durabilité</a></li>
+    <li><a onclick="go('vocab')">Hassaniya</a></li>
+    <li><a onclick="go('packing')">Équipement</a></li>
+  </ul>
+  <button class="nav-cta" onclick="go('contact')">Nous Contacter</button>
+  <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<nav class="mobile-menu" id="mobileMenu">
+  <a onclick="go('home');toggleMenu()">Accueil</a>
+  <a onclick="go('tours');toggleMenu()">Nos Circuits</a>
+  <a onclick="go('top10');toggleMenu()">Top 10</a>
+  <a onclick="go('sustainability');toggleMenu()">Durabilité</a>
+  <a onclick="go('vocab');toggleMenu()">Hassaniya</a>
+  <a onclick="go('packing');toggleMenu()">Équipement</a>
+  <a onclick="go('contact');toggleMenu()">Contact</a>
+</nav>
+
+<!-- ══════════════════════════════════════
+     PAGE : ACCUEIL
+══════════════════════════════════════ -->
+<div id="p-home" class="page active">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg" style="background-image: url('IMG_1233.jpeg')"></div>
+    <div class="hero-veil"></div>
+    <div class="hero-content">
+      <p class="t-eyebrow">Mauritanie — Le dernier Sahara intact</p>
+      <h1 class="t-display">Le désert<br><em>vous attend.</em></h1>
+      <p class="hero-sub">Trois circuits d'exception à travers l'une des dernières étendues sauvages de la planète. Des voyages conçus pour ceux qui veulent vraiment arriver.</p>
+      <div class="hero-actions">
+        <button class="btn btn-gold btn-arrow" onclick="go('tours')">Découvrir nos circuits</button>
+        <button class="btn btn-ghost" onclick="scrollDown()">Pourquoi la Mauritanie ?</button>
+      </div>
+    </div>
+    <div class="scroll-cue">
+      <span class="scroll-cue-text">Défiler</span>
+      <div class="scroll-cue-line"></div>
+    </div>
+  </section>
+
+  <!-- Texte de bienvenue -->
+  <div class="welcome-block reveal">
+    <p>La porte de l'avion s'ouvre et la chaleur arrive en premier — absolue, ancienne, sans impatience. La lumière se déverse sur un paysage qui n'a aucun intérêt à vous impressionner. Il <em>est</em>, simplement.</p>
+    <p>Là-bas, au-delà de la brume, l'essentiel devient d'une clarté brutale : l'eau, l'ombre, la direction, la confiance. Tout le reste se dissout avec une rapidité remarquable.</p>
+    <p>Vous monterez sur un chameau au rythme qu'il aura décidé, et vous comprendrez — lentement, sans qu'on vous le dise — que c'est le bon rythme. Vous dormirez sous un ciel si dense en étoiles qu'il semblera architectural.</p>
+    <p class="close-line">Les dunes vous attendent. Le feu sera allumé à votre arrivée.</p>
+  </div>
+
+  <!-- Bande photos -->
+  <div class="film-strip reveal">
+    <div class="film-strip-img"><img src="IMG_1221.jpeg" alt="Dunes d'Azoueïga"></div>
+    <div class="film-strip-img"><img src="IMG_1230.jpeg" alt="Coucher de soleil"></div>
+    <div class="film-strip-img"><img src="IMG_1273.jpeg" alt="Feu de camp"></div>
+    <div class="film-strip-img"><img src="IMG_1290.jpeg" alt="Oasis de Terjit"></div>
+    <div class="film-strip-img"><img src="IMG_1305.jpeg" alt="Chinguetti"></div>
+  </div>
+
+  <!-- Pourquoi la Mauritanie -->
+  <div class="section" id="why">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="t-eyebrow">Six raisons essentielles</p>
+        <div class="divider"></div>
+        <h2 class="t-h2">Pourquoi la Mauritanie<br>change tout.</h2>
+      </div>
+      <div class="why-grid reveal">
+        <div class="why-cell">
+          <div class="why-num">01</div>
+          <h3>Vierge et authentique</h3>
+          <p>La Mauritanie n'accueille que quelques milliers de voyageurs par an. Pas de tourisme de masse, pas d'enclaves artificielles — seulement le désert, ses habitants et vous.</p>
+        </div>
+        <div class="why-cell">
+          <div class="why-num">02</div>
+          <h3>Patrimoine UNESCO dans le sable</h3>
+          <p>Quatre des plus anciennes cités caravanières du monde — Chinguetti, Ouadane, Tichitt, Oualata — gardent des bibliothèques médiévales et une architecture introuvable ailleurs.</p>
+        </div>
+        <div class="why-cell">
+          <div class="why-num">03</div>
+          <h3>Le dernier vrai Sahara</h3>
+          <p>L'Adrar offre des dunes, des plateaux gréseux, des oasis cachées et des canyons à une échelle qui impose le silence à l'âme.</p>
+        </div>
+        <div class="why-cell">
+          <div class="why-num">04</div>
+          <h3>Des crocodiles dans le désert</h3>
+          <p>Dans les gueltas du plateau du Tagant survivent les derniers crocodiles du Nil du Sahara — vestiges vivants d'une époque où le plus grand désert du monde était vert.</p>
+        </div>
+        <div class="why-cell">
+          <div class="why-num">05</div>
+          <h3>Le train de minerai de fer</h3>
+          <p>L'un des plus grands trains du monde — 2,5 km — traverse 700 km de désert ouvert des mines jusqu'à l'Atlantique. L'un des derniers grands voyages ferroviaires de la planète.</p>
+        </div>
+        <div class="why-cell">
+          <div class="why-num">06</div>
+          <h3>L'hospitalité comme absolu moral</h3>
+          <p>Les nomades de l'Adrar pratiquent l'hospitalité comme une nécessité morale. Partager le thé, partager le silence — dans le désert, il n'y a pas de superficiel.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nos circuits -->
+  <div class="section-sm">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="t-eyebrow">Trois chemins vers le silence</p>
+        <div class="divider"></div>
+        <h2 class="t-h2">Nos circuits.</h2>
+      </div>
+      <div class="tour-grid reveal">
+        <div class="tour-card" onclick="go('tour-adrar')">
+          <img src="IMG_1233.jpeg" alt="Adrar">
+          <div class="tc-overlay">
+            <span class="tc-tag">7 jours · Adrar</span>
+            <div class="tc-title">Voyage dans l'Adrar</div>
+            <p class="tc-desc">Dunes, cités saintes, oasis et, si vous le souhaitez, le mythique train de minerai de fer.</p>
+            <span class="tc-link">Découvrir →</span>
+          </div>
+        </div>
+        <div class="tour-card" onclick="go('tour-detox')">
+          <img src="IMG_1284.jpeg" alt="Détox numérique">
+          <div class="tc-overlay">
+            <span class="tc-tag">7 jours · Détox numérique</span>
+            <div class="tc-title">Détox dans le<br>Désert</div>
+            <p class="tc-desc">Téléphones mis sous scellés. Yoga à l'aube. Feux de camp. Étoiles. Silence absolu.</p>
+            <span class="tc-link">Découvrir →</span>
+          </div>
+        </div>
+        <div class="tour-card" onclick="go('tour-grand')">
+          <img src="IMG_1247.jpeg" alt="Grande Boucle">
+          <div class="tc-overlay">
+            <span class="tc-tag">8 jours · Adrar & Tagant</span>
+            <div class="tc-title">La Grande<br><em>Boucle</em></div>
+            <p class="tc-desc">Des cités caravanières aux crocodiles du désert et à la ville fantôme de Tichitt.</p>
+            <span class="tc-link">Découvrir →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Citation -->
+  <div class="container reveal">
+    <div class="pull-quote">
+      <blockquote>« Vous ne vous résoudrez pas en une semaine. Mais quelque chose se déplacera. C'est ce qui se passe toujours ici. »</blockquote>
+    </div>
+  </div>
+
+  <!-- Seconde bande photos -->
+  <div class="film-strip reveal" style="margin: 3rem 0;">
+    <div class="film-strip-img"><img src="IMG_1256.jpeg" alt="Canyon"></div>
+    <div class="film-strip-img"><img src="IMG_1307.jpeg" alt="Chinguetti au crépuscule"></div>
+    <div class="film-strip-img"><img src="IMG_1273.jpeg" alt="Nuit au désert"></div>
+  </div>
+
+</div><!-- /home -->
+
+<!-- ══════════════════════════════════════
+     PAGE : CIRCUITS (liste)
+══════════════════════════════════════ -->
+<div id="p-tours" class="page">
+  <div style="padding-top:90px">
+    <button class="back-btn" onclick="go('home')">Retour</button>
+    <div class="section">
+      <div class="container">
+        <div class="section-header">
+          <p class="t-eyebrow">Nos voyages</p>
+          <div class="divider"></div>
+          <h2 class="t-h2">Trois façons de<br>traverser le silence.</h2>
+          <p class="t-lead" style="max-width:540px;margin-top:1rem;">Chaque circuit est conçu avec soin. Chacun sera inoubliable. Tous partent et arrivent à Nouakchott, sauf indication contraire.</p>
+        </div>
+        <div class="tour-grid">
+          <div class="tour-card" onclick="go('tour-adrar')">
+            <img src="IMG_1233.jpeg" alt="Adrar">
+            <div class="tc-overlay">
+              <span class="tc-tag">7 jours · Adrar</span>
+              <div class="tc-title">Voyage dans l'Adrar</div>
+              <p class="tc-desc">Dunes d'Azoueïga, oasis de Terjit, Chinguetti, Ouadane et le choix du train de minerai de fer.</p>
+              <span class="tc-link">Voir les détails →</span>
+            </div>
+          </div>
+          <div class="tour-card" onclick="go('tour-detox')">
+            <img src="IMG_1284.jpeg" alt="Détox">
+            <div class="tc-overlay">
+              <span class="tc-tag">7 jours · Détox numérique</span>
+              <div class="tc-title">Détox dans le Désert</div>
+              <p class="tc-desc">Yoga, chameaux, feux de camp, étoiles. Téléphones scellés du premier au dernier jour.</p>
+              <span class="tc-link">Voir les détails →</span>
+            </div>
+          </div>
+          <div class="tour-card" onclick="go('tour-grand')">
+            <img src="IMG_1247.jpeg" alt="Grande Boucle">
+            <div class="tc-overlay">
+              <span class="tc-tag">8 jours · Adrar & Tagant</span>
+              <div class="tc-title">La Grande Boucle</div>
+              <p class="tc-desc">La grande boucle : cités UNESCO, crocodiles du désert, ville fantôme de Tichitt.</p>
+              <span class="tc-link">Voir les détails →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : CIRCUIT ADRAR
+══════════════════════════════════════ -->
+<div id="p-tour-adrar" class="page">
+  <button class="back-btn" onclick="go('tours')" style="position:fixed;top:72px;left:0;z-index:150;background:rgba(22,17,12,0.85)">Retour aux circuits</button>
+  <div class="page-hero">
+    <img src="IMG_1221.jpeg" alt="Dunes d'Azoueïga">
+    <div class="page-hero-veil"></div>
+    <div class="page-hero-content">
+      <p class="t-eyebrow" style="margin-bottom:1rem">7 jours · Adrar</p>
+      <h1 class="t-display">Voyage dans<br><em>l'Adrar</em></h1>
+    </div>
+  </div>
+  <div class="container" style="padding-top:2rem;padding-bottom:5rem">
+    <div class="tour-meta-bar">
+      <div class="tmi"><div class="tmi-label">Durée</div><div class="tmi-value">7 jours / 6 nuits</div></div>
+      <div class="tmi"><div class="tmi-label">Départ / Retour</div><div class="tmi-value">Nouakchott</div></div>
+      <div class="tmi"><div class="tmi-label">Groupe</div><div class="tmi-value">8 personnes max.</div></div>
+      <div class="tmi"><div class="tmi-label">Niveau</div><div class="tmi-value">Modéré</div></div>
+      <div class="tmi"><div class="tmi-label">Saison</div><div class="tmi-value">Novembre – Mars</div></div>
+    </div>
+    <div class="tour-layout">
+      <div>
+        <p class="t-lead" style="margin-bottom:2.5rem">Une traversée du cœur doré du Sahara — de la capitale atlantique à travers les ergs infinis, les cités saintes et les oasis cachées jusqu'au bord du monde.</p>
+        <div class="day-line">
+          <div class="day-tag">Jour 1</div>
+          <div class="day-title">Nouakchott → Dunes d'Azoueïga</div>
+          <p class="day-body">Départ à l'aube en convoi 4×4 vers le nord. Arrivée en début d'après-midi au pied de la Tenouagoujert — la plus haute dune de Mauritanie. Au coucher du soleil, le sable passe de l'or au rouge sang. Nuit sous la voûte laiteuse de la Voie lactée.</p>
+        </div>
+        <div class="day-line">
+          <div class="day-tag">Jour 2</div>
+          <div class="day-title">Azoueïga → Oasis de Terjit</div>
+          <p class="day-body">Randonnée à dos de chameau le long de la crête dunaire à l'aube. Bref arrêt à Atar pour le ravitaillement. Cap sur l'oasis de Terjit — un canyon extraordinaire de sources fraîches, de palmiers et d'hirondelles nichées dans des falaises de terracotta. Nuit dans les gorges.</p>
+        </div>
+        <div class="day-line">
+          <div class="day-tag">Jour 3</div>
+          <div class="day-title">Terjit → Chinguetti, la Septième Ville Sainte</div>
+          <p class="day-body">Route vers l'est à travers les regs et les champs de sable. Visite de la mosquée du XIIIe siècle et des bibliothèques familiales gardant des manuscrits de 800 ans sur l'astronomie, les mathématiques et la théologie. Dîner chez une famille locale.</p>
+        </div>
+        <div class="day-line">
+          <div class="day-tag">Jour 4</div>
+          <div class="day-title">Chinguetti → Ouadane, au Bord du Monde</div>
+          <p class="day-body">La plus isolée des quatre cités caravanières, perchée sur une falaise dominant une mer de sable. Exploration du quartier du XIe siècle et de la mosquée restaurée du XVe. La nuit au gîte du village est inoubliable.</p>
+        </div>
+        <div class="day-line">
+          <div class="day-tag">Jour 5</div>
+          <div class="day-title">Ouadane — Une journée libre</div>
+          <p class="day-body">Randonnée le long de la falaise, visite des citernes antiques, observation des caravanes de chameaux dans la plaine. L'après-midi, début du retour vers Atar avec nuit en bivouac dans le désert ouvert.</p>
+        </div>
+        <div class="day-line">
+          <div class="day-tag">Jour 6</div>
+          <div class="day-title">Retour à Atar — Le carrefour</div>
+          <p class="day-body">Retour à Atar. C'est ici que les chemins se séparent : continuer vers le sud en direction de Nouakchott (Option A) — ou partir vers le nord-ouest pour Choum et le légendaire train de minerai de fer jusqu'à Nouadhibou (Option B).</p>
+        </div>
+        <div class="day-line">
+          <div class="day-tag">Jour 7</div>
+          <div class="day-title">Option A : Nouakchott — Option B : Train jusqu'à Nouadhibou</div>
+          <p class="day-body"><strong style="color:var(--gold)">Option A :</strong> Route vers le sud. Dîner de célébration au Port de Pêche de Nouakchott à la tombée du soir.<br><br><strong style="color:var(--gold)">Option B :</strong> Montez à bord du train SNIM à Choum — jusqu'à 2,5 km de long — et traversez 700 km de désert ouvert jusqu'au port atlantique de Nouadhibou. En wagon passagers ou gratuitement dans un wagon de minerai à ciel ouvert sous les étoiles.</p>
+        </div>
+      </div>
+      <aside>
+        <div class="sidebar-box">
+          <h4>Inclus dans le prix</h4>
+          <ul class="sb-list">
+            <li>Tous les transferts en 4×4</li>
+            <li>Tous les hébergements</li>
+            <li>Tous les repas</li>
+            <li>Accompagnateur francophone</li>
+            <li>Guides mauritaniens locaux</li>
+            <li>Randonnées à dos de chameau</li>
+            <li>Entrées et visites de bibliothèques</li>
+            <li>Équipement de bivouac désert</li>
+          </ul>
+          <h4 style="margin-top:1.5rem">Non inclus</h4>
+          <ul class="sb-list">
+            <li>Vols vers Nouakchott</li>
+            <li>Visa (renseignements sur demande)</li>
+            <li>Dépenses personnelles</li>
+            <li>Assurance voyage</li>
+          </ul>
+          <button class="btn btn-gold btn-arrow" style="width:100%;justify-content:center;margin-top:1.5rem" onclick="go('contact')">Demander un devis</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : DÉTOX NUMÉRIQUE
+══════════════════════════════════════ -->
+<div id="p-tour-detox" class="page">
+  <button class="back-btn" onclick="go('tours')" style="position:fixed;top:72px;left:0;z-index:150;background:rgba(22,17,12,0.85)">Retour aux circuits</button>
+  <div class="page-hero">
+    <img src="IMG_1273.jpeg" alt="Feu de camp">
+    <div class="page-hero-veil"></div>
+    <div class="page-hero-content">
+      <p class="t-eyebrow" style="margin-bottom:1rem">7 jours · Détox numérique</p>
+      <h1 class="t-display">Détox dans<br><em>le Désert</em></h1>
+    </div>
+  </div>
+  <div class="container" style="padding-top:2rem;padding-bottom:5rem">
+    <div class="tour-meta-bar">
+      <div class="tmi"><div class="tmi-label">Durée</div><div class="tmi-value">7 jours / 7 nuits</div></div>
+      <div class="tmi"><div class="tmi-label">Départ / Retour</div><div class="tmi-value">Nouakchott</div></div>
+      <div class="tmi"><div class="tmi-label">Groupe</div><div class="tmi-value">10 personnes max.</div></div>
+      <div class="tmi"><div class="tmi-label">Téléphones</div><div class="tmi-value">Scellés J1 → J7</div></div>
+      <div class="tmi"><div class="tmi-label">Saison</div><div class="tmi-value">Novembre – Mars</div></div>
+    </div>
+    <div class="tour-layout">
+      <div>
+        <p class="t-lead" style="margin-bottom:1.5rem">Sept jours complètement déconnectés. Les téléphones sont scellés au départ et ne sont rendus qu'à Atar le dernier jour — sans exception.</p>
+        <p class="t-body" style="margin-bottom:2.5rem">Chaque matin commence par le yoga au lever du soleil. Les journées se déroulent en randonnées à dos de chameau, marches guidées dans le désert et visites de cités caravanières antiques. Les soirs appartiennent au feu. Les nuits, aux étoiles.</p>
+
+        <div class="day-line"><div class="day-tag">Jour 1</div><div class="day-title">Arrivée & Déconnexion — Nouakchott → Azoueïga</div><p class="day-body">Téléphones scellés. Départ à l'aube. Arrivée au camp des dunes. Première pratique du silence — 30 minutes de méditation assise dans les dunes. Marche au coucher du soleil jusqu'au sommet. Feu de bienvenue et observation des étoiles.</p></div>
+
+        <div class="day-line"><div class="day-tag">Jour 2</div><div class="day-title">Le Corps dans le Désert — Azoueïga</div><p class="day-body">06h15 — Yoga du matin sur la crête de la dune. Petit-déjeuner : dattes, galettes, thé à la menthe. Randonnée à dos de chameau, 3 heures. Heure de repos en pleine chaleur. Marche désert : navigation sans GPS. Soirée autour du feu avec histoires nomades.</p></div>
+
+        <div class="day-line"><div class="day-tag">Jour 3</div><div class="day-title">L'Oasis Sacrée — Terjit</div><p class="day-body">Yin yoga à l'orée de l'oasis. Randonnée dans les gorges de Terjit. Baignade dans les sources naturelles. Après-midi libre. Randonnée à dos de chameau au coucher du soleil. Soirée de silence au coin du feu — une heure sans paroles autour des braises.</p></div>
+
+        <div class="day-line"><div class="day-tag">Jour 4</div><div class="day-title">Manuscrits & Mémoire — Chinguetti</div><p class="day-body">Yoga sur les toits. Visite d'une bibliothèque privée avec des manuscrits du XIVe siècle. Promenade dans le quartier fantôme. Marche solo de deux heures dans un périmètre balisé, sans conversation. Cercle de partage autour du feu.</p></div>
+
+        <div class="day-line"><div class="day-tag">Jour 5</div><div class="day-title">Au Bord du Monde — Ouadane</div><p class="day-body">Yoga au bord de la falaise, pranayama et méditation assise. Exploration des ruines du XIe siècle. Randonnée à dos de chameau, 3 heures, sur le plateau. Soirée musicale avec un musicien local jouant de la tidinit.</p></div>
+
+        <div class="day-line"><div class="day-tag">Jour 6</div><div class="day-title">Silence Profond — Bivouac en plein désert</div><p class="day-body">Yoga avant l'aube et exercices de respiration. Grande randonnée de 15 km à travers l'erg et le hamada. Retour au camp au coucher du soleil. Cérémonie de clôture : chacun laisse quelque chose dans le désert — habitudes, pensées, objets — offerts au feu.</p></div>
+
+        <div class="day-line"><div class="day-tag">Jour 7</div><div class="day-title">Retour — Désert → Nouakchott</div><p class="day-body">Dernier yoga du matin : intention pour le retour. Démontage du camp. Téléphones rendus scellés à Atar. Ouvrez-les quand vous êtes prêt — rien ne presse.</p></div>
+      </div>
+      <aside>
+        <div class="sidebar-box">
+          <h4>Éléments du programme</h4>
+          <ul class="sb-list">
+            <li>Yoga quotidien à l'aube (60–75 min.)</li>
+            <li>3 randonnées à dos de chameau</li>
+            <li>4 marches guidées dans le désert</li>
+            <li>6 soirées autour du feu</li>
+            <li>3 sessions d'observation des étoiles</li>
+            <li>Marche solo dans le désert</li>
+            <li>Visite d'une bibliothèque de manuscrits</li>
+            <li>Cérémonie de clôture</li>
+            <li>Appareil photo argentique fourni</li>
+          </ul>
+          <div style="margin-top:1.5rem;background:rgba(200,169,106,0.08);border-left:2px solid var(--gold);padding:1rem 1.2rem">
+            <p style="font-size:0.8rem;color:var(--text);line-height:1.7">Les téléphones sont mis sous scellés dans des enveloppes au départ de Nouakchott et rendus uniquement à Atar le septième jour.</p>
+          </div>
+          <button class="btn btn-gold btn-arrow" style="width:100%;justify-content:center;margin-top:1.5rem" onclick="go('contact')">Demander un devis</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : GRANDE BOUCLE
+══════════════════════════════════════ -->
+<div id="p-tour-grand" class="page">
+  <button class="back-btn" onclick="go('tours')" style="position:fixed;top:72px;left:0;z-index:150;background:rgba(22,17,12,0.85)">Retour aux circuits</button>
+  <div class="page-hero">
+    <img src="IMG_1247.jpeg" alt="Piste dans le canyon">
+    <div class="page-hero-veil"></div>
+    <div class="page-hero-content">
+      <p class="t-eyebrow" style="margin-bottom:1rem">8 jours · Adrar & Tagant</p>
+      <h1 class="t-display">La Grande<br><em>Boucle</em></h1>
+    </div>
+  </div>
+  <div class="container" style="padding-top:2rem;padding-bottom:5rem">
+    <div class="warn-box">
+      <p>⚠ Ce circuit représente un niveau de difficulté et d'isolement supérieur. Deux véhicules 4×4 minimum et un téléphone satellite sont obligatoires. La récompense : une route si rarement empruntée qu'elle existe à peine sur les cartes.</p>
+    </div>
+    <div class="tour-meta-bar">
+      <div class="tmi"><div class="tmi-label">Durée</div><div class="tmi-value">8 jours / 7 nuits</div></div>
+      <div class="tmi"><div class="tmi-label">Départ / Retour</div><div class="tmi-value">Nouakchott</div></div>
+      <div class="tmi"><div class="tmi-label">Groupe</div><div class="tmi-value">6 personnes max.</div></div>
+      <div class="tmi"><div class="tmi-label">Niveau</div><div class="tmi-value">Exigeant</div></div>
+      <div class="tmi"><div class="tmi-label">Véhicules</div><div class="tmi-value">2 × 4×4 min.</div></div>
+    </div>
+    <div class="tour-layout">
+      <div>
+        <p class="t-lead" style="margin-bottom:2.5rem">Une épopée à travers deux des régions les plus reculées de la Mauritanie. Des cités caravanières UNESCO de l'Adrar, la route descend vers le sud dans le plateau du Tagant — un monde plus sauvage, plus rare. Des crocodiles dans le désert. Des villes fantômes. Des pistes que le vent efface.</p>
+
+        <div class="day-line"><div class="day-tag">Jour 1</div><div class="day-title">Nouakchott → Chinguetti</div><p class="day-body">Départ au lever du soleil. Bref arrêt à Atar. Arrivée à Chinguetti en fin d'après-midi. Visite de la mosquée et d'une bibliothèque de manuscrits antiques. Dîner chez une famille locale.</p></div>
+
+        <div class="day-line"><div class="day-tag">Jour 2</div><div class="day-title">Chinguetti → Ouadane</div><p class="day-body">Route vers l'est jusqu'à la cité caravanière la plus isolée. Ouadane se dresse sur une falaise dominant une mer de sable. Exploration du quartier en ruines du XIe siècle. Nuit au gîte du village.</p></div>
+
+        <div class="day-line"><div class="day-tag">Jour 3</div><div class="day-title">Ouadane → Tidjikja</div><p class="day-body">La journée de conduite la plus exigeante : longue descente du plateau de l'Adrar vers le Tagant. Le paysage se transforme de l'erg doré au hamada sombre et aux escarpements rouge rouille. Nuit à Tidjikja, chef-lieu de la région du Tagant.</p></div>
+
+        <div class="day-line"><div class="day-tag">Jour 4</div><div class="day-title">Tidjikja → Guelta Matmata — Les derniers crocodiles du Sahara</div><p class="day-body">Route vers Nbeika, puis 25 km de piste jusqu'à l'entrée des gorges. Trois kilomètres à pied dans le canyon. Au bout : les derniers crocodiles du Nil du Sahara — des reliques vivantes d'un passé vert. Approchez en silence. Prenez des jumelles. Bivouac à l'entrée du canyon sous un ciel improbable.</p></div>
+
+        <div class="day-line"><div class="day-tag">Jour 5</div><div class="day-title">Guelta Matmata → Tichitt</div><p class="day-body">Longue et enthousiasmante piste vers l'est à travers la dépression d'Aoukar. Tichitt est une cité caravanière UNESCO d'une beauté bouleversante — des maisons de pierre à moitié ensevelies sous le sable, moins de 1 000 habitants, un silence absolu. Nuit au village.</p></div>
+
+        <div class="day-line"><div class="day-tag">Jour 6</div><div class="day-title">Tichitt — Promenade matinale & Retour</div><p class="day-body">Dernière promenade dans les ruines. Retour vers l'ouest via Tidjikja. Dernier feu de camp dans le désert ouvert.</p></div>
+
+        <div class="day-line"><div class="day-tag">Jours 7–8</div><div class="day-title">Retour à Nouakchott</div><p class="day-body">Route de la Route de l'Espoir jusqu'à la côte atlantique. Arrivée à Nouakchott. Dîner de clôture au Port de Pêche avec du poisson frais tandis que les pirogues rentrent de la mer.</p></div>
+      </div>
+      <aside>
+        <div class="sidebar-box">
+          <h4>Points forts</h4>
+          <ul class="sb-list">
+            <li>4 cités caravanières UNESCO</li>
+            <li>Derniers crocodiles du Nil du Sahara</li>
+            <li>Ville fantôme de Tichitt</li>
+            <li>Piste du plateau du Tagant</li>
+            <li>Traversée du désert de l'Aoukar</li>
+            <li>Bibliothèques de manuscrits antiques</li>
+          </ul>
+          <h4 style="margin-top:1.5rem">Équipement obligatoire</h4>
+          <ul class="sb-list">
+            <li>Min. 2 × 4×4</li>
+            <li>Téléphone satellite / SPOT</li>
+            <li>Réserves de carburant pour Tichitt</li>
+            <li>10+ litres d'eau par personne par jour</li>
+          </ul>
+          <button class="btn btn-gold btn-arrow" style="width:100%;justify-content:center;margin-top:1.5rem" onclick="go('contact')">Demander un devis</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : DURABILITÉ
+══════════════════════════════════════ -->
+<div id="p-sustainability" class="page">
+  <button class="back-btn" onclick="go('home')">Retour</button>
+  <div class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="t-eyebrow">Notre engagement</p>
+        <div class="divider"></div>
+        <h2 class="t-h2">Voyager avec<br>conscience.</h2>
+      </div>
+      <div class="pull-quote">
+        <blockquote>« La Mauritanie n'est pas une destination que nous vendons. C'est un lieu dont nous sommes responsables. »</blockquote>
+      </div>
+      <p class="t-lead" style="max-width:720px;margin-bottom:3rem">Les écosystèmes désertiques, les cités antiques et les cultures nomades que vous rencontrerez sont d'une fragilité extraordinaire. Ils ont survécu à des millénaires d'adversité naturelle. Ce qu'ils supportent moins bien, c'est un tourisme irresponsable. Nous le prenons au sérieux — et nous vous demandons de le faire avec nous.</p>
+
+      <div class="pledge-layout">
+        <div class="pledge-col">
+          <h3>Ce que nous nous engageons à faire</h3>
+          <div class="pledge-item"><h4>Local d'abord</h4><p>Nous travaillons exclusivement avec des guides, chauffeurs, cuisiniers et partenaires mauritaniens. L'argent que vous dépensez va aussi profondément que possible dans l'économie locale.</p></div>
+          <div class="pledge-item"><h4>Petits groupes par principe</h4><p>Dix personnes maximum — non pas comme argument marketing, mais comme nécessité écologique et culturelle. Les grands groupes endommagent les écosystèmes dunaires et submergent les petites communautés.</p></div>
+          <div class="pledge-item"><h4>Zéro déchet dans le désert</h4><p>Nous emportons tous les déchets du désert et les ramenons à Nouakchott pour une élimination correcte. Rien n'est enterré, brûlé ou abandonné.</p></div>
+          <div class="pledge-item"><h4>Salaires équitables</h4><p>Nous payons des salaires équitables au-dessus du marché local, fournissons un équipement adapté à tous nos collaborateurs et entretenons des relations à long terme avec nos partenaires.</p></div>
+          <div class="pledge-item"><h4>Compensation carbone</h4><p>Nous compensons l'empreinte carbone de chaque vol dans nos programmes via des projets de reforestation certifiés en Afrique de l'Ouest.</p></div>
+          <div class="pledge-item"><h4>Projets communautaires</h4><p>Un pourcentage de chaque réservation finance des projets dans la région de l'Adrar, notamment la préservation des bibliothèques de manuscrits de Chinguetti et l'accès à l'eau potable dans les villages isolés.</p></div>
+        </div>
+        <div class="pledge-col">
+          <h3>Ce que nous vous demandons</h3>
+          <div class="pledge-item"><h4>Ne rien laisser derrière vous</h4><p>Chaque emballage, chaque bouteille, chaque mégot — tout repart avec le véhicule. Le désert semble vide. Il ne l'est pas.</p></div>
+          <div class="pledge-item"><h4>Demander avant de photographier</h4><p>Partagez d'abord un thé. La photo, si elle vient, sera meilleure. Pointer un appareil sur quelqu'un sans permission est un acte de prélèvement, pas de connexion.</p></div>
+          <div class="pledge-item"><h4>S'habiller avec respect</h4><p>La Mauritanie est un pays musulman avec des codes de modestie profonds. Couvrir les épaules et les genoux ne coûte rien et dit beaucoup.</p></div>
+          <div class="pledge-item"><h4>Ne rien emporter</h4><p>Aucun tesson, aucune pierre sculptée, aucun fragment de mur antique. Ces sites sont non protégés et irremplaçables.</p></div>
+          <div class="pledge-item"><h4>Respecter le silence</h4><p>Le désert offre quelque chose de plus en plus rare : un vrai silence. Ne le remplissez pas inutilement. Laissez aux autres voyageurs — et à vous-même — d'y accéder.</p></div>
+          <div class="pledge-item"><h4>Voyager avec honnêteté</h4><p>Vous avez pris l'avion et brûlé du carburant pour rejoindre un pays qui ne contribue presque rien aux pressions climatiques qui menacent maintenant son propre territoire. Portez cette contradiction avec humilité plutôt que défensive.</p></div>
+        </div>
+      </div>
+      <p class="t-lead" style="max-width:720px;margin-top:3rem">Nous croyons que le tourisme, pratiqué avec un vrai soin, peut être une force pour la conservation, la dignité culturelle et la résilience économique. Nous vous demandons de nous aider à le faire bien.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : HASSANIYA
+══════════════════════════════════════ -->
+<div id="p-vocab" class="page">
+  <button class="back-btn" onclick="go('home')">Retour</button>
+  <div class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="t-eyebrow">Langue & culture</p>
+        <div class="divider"></div>
+        <h2 class="t-h2">Quelques mots<br>en Hassaniya.</h2>
+      </div>
+      <div class="vocab-intro">
+        <p class="t-body">Le hassaniya est le dialecte arabe des Maures de Mauritanie. Quelques mots — et surtout le rituel du thé — ouvrent des portes et des cœurs. L'effort compte plus que la prononciation.</p>
+      </div>
+      <div class="vocab-grid">
+        <div class="vocab-card">
+          <div class="vc-arabic">السلام عليكم</div>
+          <div class="vc-roman">As-salamu alaykum</div>
+          <div class="vc-meaning">La paix soit avec vous</div>
+          <div class="vc-note">La salutation universelle — toujours répondre « wa alaykum as-salam »</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-arabic">لبس</div>
+          <div class="vc-roman">Labas</div>
+          <div class="vc-meaning">Tout va bien / Comment ça va ?</div>
+          <div class="vc-note">Réponse : « Labas, al-hamdulillah » (Bien, Dieu merci)</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-arabic">شكران</div>
+          <div class="vc-roman">Shukran</div>
+          <div class="vc-meaning">Merci</div>
+          <div class="vc-note">Utilisé souvent ; augmente immédiatement la bienveillance</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-arabic">من فضلك</div>
+          <div class="vc-roman">Min fadlik</div>
+          <div class="vc-meaning">S'il vous plaît</div>
+          <div class="vc-note">Demande formelle, très appréciée</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-arabic">أتاي</div>
+          <div class="vc-roman">Atay</div>
+          <div class="vc-meaning">Le thé</div>
+          <div class="vc-note">Le rituel social sacré. « Atay ? » est toujours une invitation à se connecter</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-arabic">الحمد لله</div>
+          <div class="vc-roman">Al-hamdulillah</div>
+          <div class="vc-meaning">Dieu merci / Tout va bien</div>
+          <div class="vc-note">Réponse à presque toute question sur votre état</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-arabic">إن شاء الله</div>
+          <div class="vc-roman">Insha'allah</div>
+          <div class="vc-meaning">Si Dieu le veut / Si possible</div>
+          <div class="vc-note">Chaque plan dans le désert est insha'allah — prenez-le avec philosophie</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-arabic">ماء</div>
+          <div class="vc-roman">Ma</div>
+          <div class="vc-meaning">Eau</div>
+          <div class="vc-note">Le mot le plus important dans le désert</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-arabic">جمل</div>
+          <div class="vc-roman">Jamal</div>
+          <div class="vc-meaning">Chameau</div>
+          <div class="vc-note">Signifie aussi « beauté » en arabe — pas un hasard</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-arabic">نعم / أيوه</div>
+          <div class="vc-roman">Na'am / Aywa</div>
+          <div class="vc-meaning">Oui</div>
+          <div class="vc-note">« Aywa » est plus familier et plus chaleureux</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-arabic">لا</div>
+          <div class="vc-roman">La</div>
+          <div class="vc-meaning">Non</div>
+          <div class="vc-note">Doux et direct à la fois</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-arabic">بكرة إن شاء الله</div>
+          <div class="vc-roman">Bukra insha'allah</div>
+          <div class="vc-meaning">Demain, si Dieu le veut</div>
+          <div class="vc-note">La philosophie du temps désertique en trois mots</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-arabic">مرحبا</div>
+          <div class="vc-roman">Marhaba</div>
+          <div class="vc-meaning">Bienvenue</div>
+          <div class="vc-note">Vous entendrez ce mot très souvent</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-arabic">يلّا</div>
+          <div class="vc-roman">Yalla</div>
+          <div class="vc-meaning">Allez / En route !</div>
+          <div class="vc-note">Le signal universel de départ</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-arabic">كثبان</div>
+          <div class="vc-roman">Koban</div>
+          <div class="vc-meaning">Les dunes</div>
+          <div class="vc-note">Le paysage qui définit tout</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vc-arabic">مع السلامة</div>
+          <div class="vc-roman">Ma'a as-salama</div>
+          <div class="vc-meaning">Au revoir / Va en paix</div>
+          <div class="vc-note">Un au revoir qui porte de la chaleur</div>
+        </div>
+      </div>
+      <div class="tea-box">
+        <h3>Le rituel du thé</h3>
+        <p>Le thé mauritanien — l'<em>atay</em> — est servi en trois verres : le premier est fort comme la mort, le second doux comme la vie, le troisième léger comme l'amour. Refuser est impoli. La patience est la vertu — un rituel complet peut durer 45 minutes et constitue le cœur de toute rencontre sociale dans le désert. Ne vous pressez jamais lors de l'atay. C'est précisément le moment où rien d'autre n'est censé se passer.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : TOP 10
+══════════════════════════════════════ -->
+<div id="p-top10" class="page">
+  <button class="back-btn" onclick="go('home')">Retour</button>
+  <div class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="t-eyebrow">Découvrir la Mauritanie</p>
+        <div class="divider"></div>
+        <h2 class="t-h2">Top 10 des incontournables.</h2>
+        <p class="t-lead" style="max-width:560px;margin-top:1rem">Dix raisons pour lesquelles la Mauritanie est l'une des destinations les plus extraordinaires au monde — bien au-delà des dunes.</p>
+      </div>
+      <div class="top10">
+        <div class="top10-row">
+          <div class="top10-num">01</div>
+          <div class="top10-content">
+            <h3>Les dunes d'Azoueïga</h3>
+            <p>La Tenouagoujert est considérée comme la plus haute dune d'Afrique. Au coucher du soleil, le sable se teinte de rouge sang, et la Voie lactée apparaît si proche qu'on croit pouvoir la toucher. Le premier bivouac ici est inoubliable.</p>
+          </div>
+          <img src="IMG_1221.jpeg" alt="Azoueïga" class="top10-img">
+        </div>
+        <div class="top10-row">
+          <div class="top10-num">02</div>
+          <div class="top10-content">
+            <h3>Chinguetti, la Septième Ville Sainte</h3>
+            <p>Jadis point de rassemblement des pèlerins d'Afrique de l'Ouest en route vers La Mecque. Aujourd'hui, des bibliothèques familiales conservent des manuscrits de 800 ans sur l'astronomie, les mathématiques et la théologie. Le vent déplace les dunes dans les ruelles abandonnées.</p>
+          </div>
+          <img src="IMG_1305.jpeg" alt="Chinguetti" class="top10-img">
+        </div>
+        <div class="top10-row">
+          <div class="top10-num">03</div>
+          <div class="top10-content">
+            <h3>L'oasis de Terjit</h3>
+            <p>Un paradis de canyon d'une beauté improbable — palmiers, sources fraîches, hirondelles dans les falaises de terracotta. Se baigner au cœur du Sahara. Le lieu le plus surprenant du voyage.</p>
+          </div>
+          <img src="IMG_1290.jpeg" alt="Terjit" class="top10-img">
+        </div>
+        <div class="top10-row">
+          <div class="top10-num">04</div>
+          <div class="top10-content">
+            <h3>Ouadane au bord de la falaise</h3>
+            <p>La plus isolée des cités caravanières, dressée sur un éperon rocheux au-dessus d'une mer de sable. Le quartier en ruines du XIe siècle est lentement reconquis par les dunes. Le silence y est complet.</p>
+          </div>
+          <img src="IMG_1307.jpeg" alt="Ouadane" class="top10-img">
+        </div>
+        <div class="top10-row">
+          <div class="top10-num">05</div>
+          <div class="top10-content">
+            <h3>Le train de minerai de fer</h3>
+            <p>Jusqu'à 2,5 km de long — l'un des plus grands trains du monde. Des mines de Zouérate au port atlantique de Nouadhibou : 700 km de désert ouvert. En wagon passagers ou gratuitement dans un wagon de minerai à ciel ouvert sous les étoiles.</p>
+          </div>
+          <img src="IMG_1233.jpeg" alt="Désert" class="top10-img">
+        </div>
+        <div class="top10-row">
+          <div class="top10-num">06</div>
+          <div class="top10-content">
+            <h3>Les crocodiles du désert à Matmata</h3>
+            <p>Dans une gorge de grès du plateau du Tagant survivent les derniers crocodiles du Nil du Sahara. Un lien vivant avec une époque où le plus grand désert de la planète abritait des rivières et des lacs verdoyants.</p>
+          </div>
+          <img src="IMG_1256.jpeg" alt="Canyon" class="top10-img">
+        </div>
+        <div class="top10-row">
+          <div class="top10-num">07</div>
+          <div class="top10-content">
+            <h3>Le ciel étoilé du Sahara</h3>
+            <p>Sans pollution lumineuse, sans nuages — la Voie lactée n'est pas une abstraction ici, c'est un fait architectural. Allongé sur le sable frais, avec les braises du feu et le silence tout autour.</p>
+          </div>
+          <img src="IMG_1273.jpeg" alt="Feu de camp" class="top10-img">
+        </div>
+        <div class="top10-row">
+          <div class="top10-num">08</div>
+          <div class="top10-content">
+            <h3>Tichitt, ville fantôme dans les dunes</h3>
+            <p>Une cité du patrimoine mondial de l'UNESCO qui retourne lentement au sable. Moins de 1 000 habitants. Des maisons de pierre d'une qualité artisanale extraordinaire. Des routes caravanières qui portaient jadis l'or et le sel.</p>
+          </div>
+          <img src="IMG_1307.jpeg" alt="Tichitt" class="top10-img">
+        </div>
+        <div class="top10-row">
+          <div class="top10-num">09</div>
+          <div class="top10-content">
+            <h3>L'hospitalité nomade</h3>
+            <p>Trois verres d'atay. Des histoires autour du feu. Des nuits dans le désert avec des guides qui connaissent chaque crête de dune. L'hospitalité comme absolu moral — dans le désert, ce n'est pas une formule.</p>
+          </div>
+          <img src="IMG_1230.jpeg" alt="Coucher de soleil" class="top10-img">
+        </div>
+        <div class="top10-row">
+          <div class="top10-num">10</div>
+          <div class="top10-content">
+            <h3>Les pistes de l'Adrar</h3>
+            <p>Pas seulement les destinations, mais le chemin qui y mène : canyons, pistes de sable, plateaux basaltiques et ces moments où la piste s'arrête devant vous — et le GPS se tait. C'est la Mauritanie.</p>
+          </div>
+          <img src="IMG_1256.jpeg" alt="Piste" class="top10-img">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : ÉQUIPEMENT
+══════════════════════════════════════ -->
+<div id="p-packing" class="page">
+  <button class="back-btn" onclick="go('home')">Retour</button>
+  <div class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="t-eyebrow">Préparation</p>
+        <div class="divider"></div>
+        <h2 class="t-h2">Ce qu'il faut<br>emporter dans le désert.</h2>
+        <p class="t-lead" style="max-width:620px;margin-top:1rem">Le désert punit autant les bagages trop lourds que trop légers. Cette liste a été établie par des gens qui connaissent la Mauritanie — pas depuis internet, mais depuis le sable.</p>
+      </div>
+
+      <div class="pack-banner">
+        <p><strong>Règle d'or :</strong> Si vous portez quelque chose dont vous n'avez pas besoin chaque jour, laissez-le chez vous. Si vous hésitez — vous en avez besoin. Surtout l'eau et la protection solaire.</p>
+      </div>
+
+      <div class="pack-grid">
+        <div class="pack-cat">
+          <h3>Vêtements</h3>
+          <ul class="pack-ul">
+            <li>Chemises légères à manches longues (coton ou lin) × 3</li>
+            <li>Pantalons longs et légers × 2</li>
+            <li>Polaire ou pull en laine fine</li>
+            <li>Veste coupe-vent</li>
+            <li>Chaussettes de marche × 4–5 paires</li>
+            <li>Sous-vêtements × 5</li>
+            <li>Vêtements de nuit (les nuits peuvent être froides)</li>
+            <li>Grand foulard / chèche (poussière, soleil, froid)</li>
+            <li>Bonnet et cagoule légère</li>
+          </ul>
+        </div>
+        <div class="pack-cat">
+          <h3>Chaussures</h3>
+          <ul class="pack-ul">
+            <li>Chaussures de randonnée solides, déjà portées (soutien à la cheville)</li>
+            <li>Sandales légères pour le camp</li>
+            <li>Guêtres (protection sable dans les dunes)</li>
+          </ul>
+        </div>
+        <div class="pack-cat">
+          <h3>Protection solaire & météo</h3>
+          <ul class="pack-ul">
+            <li>Crème solaire SPF 50+ (en grande quantité)</li>
+            <li>Baume à lèvres avec protection solaire</li>
+            <li>Lunettes de soleil avec protection UV (avec cordon !)</li>
+            <li>Chapeau à large bord</li>
+            <li>Lunettes de protection / ski pour les tempêtes de sable</li>
+          </ul>
+        </div>
+        <div class="pack-cat">
+          <h3>Hygiène & santé</h3>
+          <ul class="pack-ul">
+            <li>Pharmacie personnelle (pansements, ibuprofène, imodium)</li>
+            <li>Sels de réhydratation</li>
+            <li>Répulsif anti-insectes</li>
+            <li>Gel désinfectant</li>
+            <li>Lingettes humides (douche de remplacement dans le désert)</li>
+            <li>Médicaments personnels avec ordonnance</li>
+            <li>Petit kit d'ongles (le sable fragmente les ongles)</li>
+          </ul>
+        </div>
+        <div class="pack-cat">
+          <h3>Navigation & lumière</h3>
+          <ul class="pack-ul">
+            <li>Lampe frontale + piles de rechange</li>
+            <li>Petit compas (pas de GPS nécessaire, mais rassurant)</li>
+            <li>Carnet de notes en papier et stylo</li>
+            <li>Couteau de poche</li>
+          </ul>
+        </div>
+        <div class="pack-cat">
+          <h3>Couchage & confort</h3>
+          <ul class="pack-ul">
+            <li>Sac de couchage (jusqu'à −5°C, les nuits peuvent être froides)</li>
+            <li>Oreiller de voyage compressible</li>
+            <li>Bouchons d'oreilles</li>
+            <li>Masque de sommeil</li>
+          </ul>
+        </div>
+        <div class="pack-cat">
+          <h3>Sac à dos & bagages</h3>
+          <ul class="pack-ul">
+            <li>Sac à dos de randonnée 20–25L</li>
+            <li>Gourdes × 2 (capacité min. 2L chacune)</li>
+            <li>Petite pochette pour objets de valeur</li>
+            <li>Sacs étanches à la poussière pour l'électronique</li>
+          </ul>
+        </div>
+        <div class="pack-cat">
+          <h3>Documents & argent</h3>
+          <ul class="pack-ul">
+            <li>Passeport (valide min. 6 mois)</li>
+            <li>Visa (nous pouvons vous aider à l'organiser)</li>
+            <li>Assurance voyage avec numéros d'urgence</li>
+            <li>Espèces en USD ou EUR (ouguiya sur place)</li>
+            <li>Copies de tous les documents</li>
+          </ul>
+        </div>
+        <div class="pack-cat">
+          <h3>Optionnel mais recommandé</h3>
+          <ul class="pack-ul">
+            <li>Appareil photo argentique + pellicule (fourni pour le détox)</li>
+            <li>Petites jumelles (crocodiles, étoiles, faucons)</li>
+            <li>Journal de voyage</li>
+            <li>Livre ou liseuse</li>
+            <li>Petit cadeau (bonbons pour les enfants, objets utiles)</li>
+          </ul>
+        </div>
+        <div class="pack-cat">
+          <h3>L'eau — Note spéciale</h3>
+          <ul class="pack-ul">
+            <li>Minimum 3–4 litres par personne par jour en activité</li>
+            <li>Les véhicules transportent toujours 10L+ de réserve</li>
+            <li>Filtre à eau / Aquatabs pour les oasis</li>
+            <li>Ajouter des électrolytes — ne pas boire que de l'eau pure</li>
+          </ul>
+        </div>
+        <div class="pack-cat">
+          <h3>À laisser chez vous</h3>
+          <ul class="pack-ul">
+            <li>Bijoux de valeur</li>
+            <li>Plus de 2 paires de chaussures</li>
+            <li>Appareils électriques pour les cheveux</li>
+            <li>Shorts (culturellement inappropriés)</li>
+            <li>Grandes valises (nous travaillons avec des sacs de expédition)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pack-banner" style="margin-top:2rem">
+        <p>Tous nos véhicules sont équipés d'une trousse de premiers secours, d'un téléphone satellite, de plaques de désenlisement, d'un cric haute levée et de vivres d'urgence. Vous n'avez pas besoin d'emporter de l'équipement de survie — mais ne négligez aucun des éléments de cette liste.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE : CONTACT
+══════════════════════════════════════ -->
+<div id="p-contact" class="page">
+  <button class="back-btn" onclick="go('home')">Retour</button>
+  <div class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="t-eyebrow">Nous écrire</p>
+        <div class="divider"></div>
+        <h2 class="t-h2">Commençons<br>par un échange.</h2>
+        <p class="t-lead" style="max-width:540px;margin-top:1rem">Chaque voyage commence par une conversation. Écrivez-nous — nous répondons sous 24 heures et discutons de tout sans pression.</p>
+      </div>
+      <div class="contact-layout">
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prénom</label>
+              <input type="text" placeholder="Marie" required>
+            </div>
+            <div class="form-group">
+              <label>Nom</label>
+              <input type="text" placeholder="Dupont" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Adresse e-mail</label>
+            <input type="email" placeholder="marie@exemple.fr" required>
+          </div>
+          <div class="form-group">
+            <label>Circuit souhaité</label>
+            <select>
+              <option>Voyage dans l'Adrar (7 jours)</option>
+              <option>Détox dans le Désert (7 jours)</option>
+              <option>La Grande Boucle — Adrar & Tagant (8 jours)</option>
+              <option>Demande personnalisée</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Période souhaitée</label>
+            <input type="text" placeholder="Novembre 2025, décembre 2025…">
+          </div>
+          <div class="form-group">
+            <label>Nombre de participants</label>
+            <input type="text" placeholder="2 personnes">
+          </div>
+          <div class="form-group">
+            <label>Votre message</label>
+            <textarea rows="5" placeholder="Parlez-nous de votre voyage idéal, de vos attentes, de vos questions…" style="resize:vertical"></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold btn-arrow">Envoyer ma demande</button>
+        </form>
+        <div class="contact-info">
+          <h3>Adrar Voyages</h3>
+          <p>Agence de voyages spécialisée en Mauritanie, basée en France. Tous nos circuits sont conduits par des guides mauritaniens locaux, avec un accompagnement francophone dédié.</p>
+          <div class="contact-detail">
+            <span class="cd-label">E-mail</span>
+            <span class="cd-value">bonjour@adrar-voyages.com</span>
+          </div>
+          <div class="contact-detail">
+            <span class="cd-label">Téléphone</span>
+            <span class="cd-value">+33 (0)1 XX XX XX XX</span>
+          </div>
+          <div class="contact-detail">
+            <span class="cd-label">Saison</span>
+            <span class="cd-value">Novembre – Mars uniquement</span>
+          </div>
+          <div class="contact-detail">
+            <span class="cd-label">Groupes</span>
+            <span class="cd-value">6 à 10 personnes maximum</span>
+          </div>
+          <div style="margin-top:2rem">
+            <div class="pull-quote" style="margin:0">
+              <blockquote style="font-size:1rem">« Chaque voyage est une conversation entre vous et le désert. Notre rôle est de veiller à ce que vous soyez bien introduit. »</blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">Adrar <em>Voyages</em></div>
+        <p class="t-body" style="max-width:280px;margin-bottom:1.2rem">Voyages d'exception en Mauritanie. Spécialiste du désert de l'Adrar et du plateau du Tagant depuis la France.</p>
+        <p class="t-body" style="font-size:0.8rem">Saison : Novembre – Mars</p>
+      </div>
+      <div class="footer-col">
+        <h4>Nos circuits</h4>
+        <ul>
+          <li><a onclick="go('tour-adrar')">Voyage dans l'Adrar</a></li>
+          <li><a onclick="go('tour-detox')">Détox dans le Désert</a></li>
+          <li><a onclick="go('tour-grand')">La Grande Boucle</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Informations</h4>
+        <ul>
+          <li><a onclick="go('top10')">Top 10 Mauritanie</a></li>
+          <li><a onclick="go('vocab')">Vocabulaire Hassaniya</a></li>
+          <li><a onclick="go('packing')">Équipement désert</a></li>
+          <li><a onclick="go('sustainability')">Notre engagement durable</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a onclick="go('contact')">Nous écrire</a></li>
+          <li><span>bonjour@adrar-voyages.com</span></li>
+          <li><span>+33 (0)1 XX XX XX XX</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Adrar Voyages. Tous droits réservés.</p>
+      <p>Voyagez avec soin. Laissez peu de traces.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════ -->
+<script>
+// Page map: logical name → element id
+const PAGE_MAP = {
+  'home':           'p-home',
+  'tours':          'p-tours',
+  'tour-adrar':     'p-tour-adrar',
+  'tour-detox':     'p-tour-detox',
+  'tour-grand':     'p-tour-grand',
+  'sustainability': 'p-sustainability',
+  'vocab':          'p-vocab',
+  'top10':          'p-top10',
+  'packing':        'p-packing',
+  'contact':        'p-contact',
+};
+
+function go(name) {
+  // Hide all
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  // Show target
+  const id = PAGE_MAP[name];
+  if (id) {
+    const el = document.getElementById(id);
+    if (el) { el.classList.add('active'); window.scrollTo(0, 0); }
+  }
+  // Close mobile menu
+  document.getElementById('mobileMenu').classList.remove('open');
+  // Re-trigger reveals
+  setTimeout(initReveal, 80);
+}
+
+// Sticky nav
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('solid', window.scrollY > 60);
+});
+
+// Mobile menu
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// Scroll to section on home
+function scrollDown() {
+  const el = document.getElementById('why');
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Scroll-reveal
+function initReveal() {
+  const revealEls = document.querySelectorAll('.page.active .reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => { el.classList.remove('in'); io.observe(el); });
+}
+window.addEventListener('DOMContentLoaded', () => setTimeout(initReveal, 100));
+
+// Contact form
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type=submit]');
+  btn.textContent = 'Message envoyé ✓';
+  btn.style.background = 'var(--ink-3)';
+  btn.style.color = 'var(--gold)';
+  btn.disabled = true;
+  e.target.reset();
+}
+</script>
+</body>
+</html>
